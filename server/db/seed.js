@@ -6,14 +6,12 @@ import { pizzas } from "../data/pizzas.js";
 
 async function seed() {
   try {
-    // Создаём таблицы
     const schema = readFileSync("./db/schema.sql", "utf-8");
 
     await pool.query(schema);
 
     console.log("Таблицы созданы");
 
-    // Добавляем пиццы
     for (const pizza of pizzas) {
       await pool.query(
         `
