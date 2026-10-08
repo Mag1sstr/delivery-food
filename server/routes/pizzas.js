@@ -4,11 +4,19 @@ import { pool } from "../db/pool.js";
 const router = Router();
 
 router.get("/", async (req, res) => {
+  const { sort } = req.query;
+
+  const allowedSorts = {
+    price_asc: "(prices->>'md')::int ASC",
+    price_desc: "(prices->>'md')::int DESC",
+    id_asc: "id ASC",
+  };
+
   try {
     const result = await pool.query(`
       SELECT *
       FROM pizzas
-      ORDER BY id
+      ORDER BY ${allowedSorts[sort] || "id"}
     `);
 
     res.json(result.rows);

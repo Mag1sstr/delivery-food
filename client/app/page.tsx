@@ -1,3 +1,5 @@
+import Header from "@/components/Header";
+import Products from "@/components/Products";
 import { Metadata } from "next";
 import Image from "next/image";
 export const metadata: Metadata = {
@@ -5,5 +7,10 @@ export const metadata: Metadata = {
   description: "Доставка еды.",
 };
 export default function Home() {
-  return <div>Привет</div>;
+  return (
+    <>
+      <Header />
+      <Products />
+    </>
+  );
 }
